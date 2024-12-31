@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -66,24 +66,28 @@
                     <h3>Payment Details</h3>
                     <div class="form-group">
                         <label for="card-number">Card Number:</label>
-                        <input type="text" id="card-number" name="card-number" required placeholder="Enter your card number">
+                        <!-- Allow only numeric values (input type 'tel' with pattern) -->
+                        <input type="text" id="card-number" name="card-number" required placeholder="Enter your card number" 
+                            pattern="\d*" title="Please enter a valid card number (numbers only)">
                     </div>
 
                     <div class="form-group">
                         <label for="expiry-date">Expiry Date (MM/YY):</label>
-                        <input type="text" id="expiry-date" name="expiry-date" required placeholder="MM/YY">
+                        <!-- Restrict expiry date to MM/YY format (only numeric values) -->
+                        <input type="text" id="expiry-date" name="expiry-date" required placeholder="MM/YY" 
+                            pattern="\d{2}/\d{2}" title="Please enter a valid expiry date (MM/YY format)">
                     </div>
 
                     <div class="form-group">
                         <label for="cvv">CVV:</label>
-                        <input type="text" id="cvv" name="cvv" required placeholder="Enter CVV">
+                        <!-- Allow only 3 numeric digits for CVV -->
+                        <input type="text" id="cvv" name="cvv" required placeholder="Enter CVV" 
+                            pattern="\d{3}" title="Please enter a valid CVV (3 digits)">
                     </div>
 
                     <!-- Submit Button -->
-                 
+                    <button type="submit" class="submit-btn">Pay Now</button>
                 </form>
-                <a href="index.html">  <button type="submit" class="submit-btn" onclick="meet()">Pay Now</button> 
-                </a>
             </div>
         </div>
     </section>
@@ -92,9 +96,12 @@
         <p>&copy; 2024 WatchStore. All Rights Reserved.</p>
     </footer>
 
-    <script > function meet()       
-    {
-        alert("Payment Sucessfully Done"); }
-        </script>
+    <script>
+        function meet() {
+            alert("Payment Successfully Done");
+        }
+    </script>
 </body>
 </html>
+
+
