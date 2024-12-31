@@ -3,110 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Create Account</title>
   <script>
-    // Sample user data to simulate account verification
-    const users = [
-      { username: 'user1', password: 'password123' },
-      { username: 'user2', password: 'password456' }
-    ];
-
-    function handleLogin(event) {
+    function handleRegister(event) {
       event.preventDefault(); // Prevent form submission
       
+      // Get the form input values
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
 
-      // Check if the username and password match any user in the "users" array
-      const user = users.find(user => user.username === username);
+      // Retrieve existing users from localStorage
+      const users = JSON.parse(localStorage.getItem('users')) || [];
 
-      if (user && user.password === password) {
-        // Redirect to shop page if login is successful
-        window.location.href = "shop.html"; // Replace with actual home page
-      } else {
-        // If login fails, display an error message
-        alert("Incorrect username or password. Please create an account if you don't have one.");
+      // Check if the username already exists
+      if (users.some(user => user.username === username)) {
+        alert("Username already exists. Please choose a different username.");
+        return;
       }
+
+      // Create new user object
+      const newUser = { username, password };
+      users.push(newUser);
+
+      // Save the updated users array to localStorage
+      localStorage.setItem('users', JSON.stringify(users));
+
+      // Redirect to login page after successful registration
+      alert("Account created successfully! Please login.");
+      window.location.href = "login.html";  // Redirect to login page
     }
   </script>
-</head>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-  }
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
 
-  .login-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-  }
+.welcome-container,
+.login-container,
+.register-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
 
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
+h1, h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
 
-  label {
-    display: block;
-    margin-top: 10px;
-    text-align: left;
-  }
+label {
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+}
 
-  input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0 15px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
 
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  button:hover {
-    background-color: #0056b3;
-  }
+button:hover {
+  background-color: #0056b3;
+}
 
-  a {
-    color: #007BFF;
-    text-decoration: none;
-  }
+a {
+  color: #007BFF;
+  text-decoration: none;
+}
 
-  a:hover {
-    text-decoration: underline;
-  }
+a:hover {
+  text-decoration: underline;
+}
+
 </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
 <body>
-  <div class="login-container">
-    <h2>Login</h2>
-    <form id="loginForm" onsubmit="handleLogin(event)">
-      <label for="username">Username or Email:</label>
+  <div class="register-container">
+    <h2>Create Account</h2>
+    <form id="registerForm" onsubmit="handleRegister(event)">
+      <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
 
-      <button type="submit">Login</button>
+      <button type="submit">Create Account</button>
     </form>
-    <p>Don't have an account? <a href="register.html">Create one here</a></p>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
   </div>
 </body>
 </html>
