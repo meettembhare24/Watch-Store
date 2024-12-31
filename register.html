@@ -4,20 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Account</title>
-  <link rel="stylesheet" href="styles.css">
   <script>
     function handleRegister(event) {
-      event.preventDefault(); // Prevent form from submitting to a server
+      event.preventDefault(); // Prevent form submission
       
-      // Here, you can validate the form fields, check if passwords match, etc.
-      // For now, assuming the registration is successful.
+      // Get the form input values
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
 
-      // Redirect to the login page
-      window.location.href = "login.html";
+      // Retrieve existing users from localStorage
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      // Check if the username already exists
+      if (users.some(user => user.username === username)) {
+        alert("Username already exists. Please choose a different username.");
+        return;
+      }
+
+      // Create new user object
+      const newUser = { username, password };
+      users.push(newUser);
+
+      // Save the updated users array to localStorage
+      localStorage.setItem('users', JSON.stringify(users));
+
+      // Redirect to login page after successful registration
+      alert("Account created successfully! Please login.");
+      window.location.href = "login.html";  // Redirect to login page
     }
   </script>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<style>
+  <style>
     body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -90,9 +108,6 @@ a:hover {
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required>
 
@@ -102,3 +117,5 @@ a:hover {
   </div>
 </body>
 </html>
+
+     
