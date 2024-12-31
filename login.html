@@ -6,80 +6,93 @@
   <title>Login Page</title>
   <link rel="stylesheet" href="styles.css">
   <script>
+    // Sample user data to simulate account verification
+    const users = [
+      { username: 'user1', password: 'password123' },
+      { username: 'user2', password: 'password456' }
+    ];
+
     function handleLogin(event) {
-      event.preventDefault(); // Prevent form from submitting to a server
+      event.preventDefault(); // Prevent form submission
       
-      // Assuming validation has been passed here (e.g., check username and password)
-      // You could check for valid credentials here if you are using JavaScript for client-side validation
-      window.location.href = "shop.html"; // Redirect to home page
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Check if the username and password match any user in the "users" array
+      const user = users.find(user => user.username === username);
+
+      if (user && user.password === password) {
+        // Redirect to shop page if login is successful
+        window.location.href = "shop.html"; // Replace with actual home page
+      } else {
+        // If login fails, display an error message
+        alert("Incorrect username or password. Please create an account if you don't have one.");
+      }
     }
   </script>
 </head>
 <style>
-    body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4;
-}
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
 
-.welcome-container,
-.login-container,
-.register-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  text-align: center;
-}
+  .login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
 
-h1, h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
 
-label {
-  display: block;
-  margin-top: 10px;
-  text-align: left;
-}
+  label {
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+  }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0 15px 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-button:hover {
-  background-color: #0056b3;
-}
+  button:hover {
+    background-color: #0056b3;
+  }
 
-a {
-  color: #007BFF;
-  text-decoration: none;
-}
+  a {
+    color: #007BFF;
+    text-decoration: none;
+  }
 
-a:hover {
-  text-decoration: underline;
-}
-
+  a:hover {
+    text-decoration: underline;
+  }
 </style>
 <body>
   <div class="login-container">
